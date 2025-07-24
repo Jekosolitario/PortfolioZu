@@ -1,0 +1,9 @@
+/* per viewport sopra i 600px */
+@media (min-width: 600px) {
+    .galleria-equilibrio {
+        margin-top: 2rem;
+        display: grid;
+        gap: 2em;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

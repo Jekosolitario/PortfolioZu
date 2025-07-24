@@ -1,0 +1,656 @@
+/* ========================================
+   PORTFOLIO ZUHIR ICHCHO - STYLE.CSS
+   ========================================
+   Approccio mobile-first senza media queries
+   (le media queries sono in responsive-style.css)
+*/
+
+/* ========================================
+   VARIABILI CSS (CSS Custom Properties)
+   ======================================== */
+:root {
+    /* Base font size per calcoli rem */
+    font-size: 62.5%;
+    /* 1rem = 10px */
+
+    /* ===== COLORI DI SFONDO ===== */
+    --bg-base: rgb(0, 0, 0);
+    --bg-secondo: rgb(0, 0, 0);
+    --bg-scuro-trasparente: rgba(0, 0, 0, 0.5);
+
+    /* ===== COLORI TESTO ===== */
+    --text-base: rgba(255, 255, 255, 0.9);
+    --text-secondo: rgba(255, 160, 160, 0.9);
+    --text-terzo: rgba(214, 184, 184, 0.9);
+
+    /* ===== COLORI LINK ===== */
+    --link-1: rgba(33, 212, 104, 0.75);
+    --link-2: rgb(0, 0, 0);
+
+    /* ===== COLORI HOVER ===== */
+    --hover-1: rgba(0, 255, 102, 0.75);
+    --hover-2: rgb(0, 0, 0);
+
+    /* ===== COLORI STATI ===== */
+    --active: rgb(0, 0, 0);
+    --focus-1: rgb(0, 0, 0);
+    /* Corretto typo "fucus" */
+    --focus-2: rgb(0, 0, 0);
+    --errore: rgb(0, 0, 0);
+
+    /* ===== OMBRE ===== */
+    --shadow-1: 0 0 10px 10px rgba(255, 99, 99, 0.2);
+    --shadow-2: 0 0 3px 2px rgba(185, 185, 185, 0.85);
+    --shadow-3: 0 0 10px 10px hsla(205, 87%, 47%, 0.15);
+    --ombra-testo: 2px 6px 2px rgb(0, 0, 0);
+
+    /* ===== BORDI ===== */
+    --bordi-1: 1px solid rgba(255, 255, 255, 0.19);
+
+    /* ===== ENERGIA TIMELINE ===== */
+    --colore-energia: hsla(205, 87%, 47%, 0.5);
+
+    /* ===== FONT FAMILY ===== */
+    --famiglia-viaoda: "Viaoda Libre", serif;
+    --famiglia-geo: "Geo", sans-serif;
+}
+
+/* ========================================
+   RESET CSS E BASE
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    cursor: default;
+}
+
+/* ========================================
+   BODY PRINCIPALE
+   ======================================== */
+body {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+
+    font-size: 1.7rem;
+    font-family: "Grenze", serif;
+    font-weight: 300;
+    line-height: 1.6;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ===== SFONDO FISSO CON OVERLAY ===== */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url(../Img/sfondo.webp);
+    /* Corretto path relativo */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    z-index: -2;
+}
+
+/* ===== OVERLAY SCURO PER SFONDO ===== */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: var(--bg-scuro-trasparente);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ========================================
+   HEADER - SEZIONE PROFILO
+   ======================================== */
+header#testaProfilo {
+    position: relative;
+    min-height: 250px;
+    text-align: center;
+
+    margin: 5rem auto;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    gap: 1em;
+}
+
+/* ===== TRIANGOLO SUPERIORE ===== */
+#testaProfilo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--bg-scuro-trasparente);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: 1;
+}
+
+/* ===== TRIANGOLO INFERIORE ===== */
+#testaProfilo::after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--bg-scuro-trasparente);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: 2;
+}
+
+/* ===== IMMAGINE PROFILO ===== */
+#testaProfilo img {
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 999;
+    position: relative;
+    opacity: 0.9;
+    border: var(--bordi-1);
+    box-shadow: var(--shadow-1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    /* Spostato qui per performance */
+}
+
+/* ===== HOVER IMMAGINE PROFILO ===== */
+#testaProfilo img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+/* ========================================
+   TITOLO HEADER
+   ======================================== */
+#titolo {
+    font-family: var(--famiglia-geo);
+    font-size: 2.5rem;
+    color: var(--text-base);
+    z-index: 999;
+    position: relative;
+    /* Aggiunto per il ::after */
+}
+
+/* ===== SOTTOLINEATURA TITOLO ===== */
+#titolo::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    /* Corretto posizionamento */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Centrato */
+    width: 80%;
+    /* Ridotto per estetica */
+    height: 3px;
+
+    background: linear-gradient(to right,
+            transparent,
+            rgba(255, 255, 255, 0.7) 50%,
+            transparent);
+}
+
+/* ========================================
+   TICKER ANIMATO - COMPETENZE
+   ======================================== */
+#tickerParole {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-scuro-trasparente);
+    padding: 0.5rem 0;
+    z-index: 999;
+}
+
+/* ===== CONTENITORE SCORRIMENTO ===== */
+.scorrimento {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    width: max-content;
+    font-weight: 500;
+    animation: scrollContinuo 50s linear infinite;
+    transition: all 0.3s ease;
+}
+
+/* ===== ELEMENTI SCORRIMENTO ===== */
+.scorrimento span {
+    display: inline-block;
+    margin-right: 2rem;
+    font-size: 1.4rem;
+    color: var(--text-secondo);
+    text-shadow: var(--ombra-testo);
+}
+
+.doppio-contenuto {
+    display: flex;
+    flex-shrink: 0;
+}
+
+/* ===== ANIMAZIONE SCORRIMENTO ===== */
+@keyframes scrollContinuo {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ===== PAUSA ALL'HOVER ===== */
+#tickerParole:hover .scorrimento {
+    animation-play-state: paused;
+}
+
+/* ========================================
+   TIMELINE ENERGETICA
+   ======================================== */
+/* ===== LINEA CENTRALE ENERGETICA ===== */
+.timeline-cavo {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: rgba(0, 153, 255, 0.15);
+    animation: glowEnergy 2.5s ease-in-out infinite alternate;
+}
+
+/* ===== ANIMAZIONE GLOW ===== */
+@keyframes glowEnergy {
+    0% {
+        box-shadow: 0 0 6px 2px var(--colore-energia);
+    }
+
+    100% {
+        box-shadow: 0 0 18px 5px var(--colore-energia);
+    }
+}
+
+/* ===== EFFETTO ELETTRICO ===== */
+.timeline-cavo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            var(--colore-energia) 25%,
+            var(--colore-energia) 50%,
+            transparent 75%);
+
+    background-size: 100% 400%;
+    background-repeat: repeat-y;
+    animation: scorrimentoEnergia 3s linear infinite;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes scorrimentoEnergia {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+/* ===== PARTICELLA ENERGIA ===== */
+.timeline-cavo::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--colore-energia);
+    border-radius: 50%;
+    box-shadow: 0 0 5px 5px var(--colore-energia);
+    animation: particellaEnergia 6s linear infinite;
+}
+
+@keyframes particellaEnergia {
+    0% {
+        top: 0%;
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.5);
+    }
+
+    100% {
+        top: 100%;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* ========================================
+   MAIN - TIMELINE PORTFOLIO
+   ======================================== */
+main#timelinePortfolio {
+    position: relative;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+    gap: 4em;
+    padding: 2em;
+    margin: 0 auto;
+}
+
+/* ===== TITOLO SEZIONE ===== */
+.titolo-sezione {
+    text-align: center;
+    font-family: var(--famiglia-geo);
+    font-size: 2em;
+    color: var(--text-secondo);
+    text-shadow: var(--ombra-testo);
+    margin-bottom: 2rem;
+    /* Aggiunto spacing */
+}
+
+/* ===== BLOCCHI TIMELINE ===== */
+section.blocco-timeline {
+    position: relative;
+    background-color: var(--bg-scuro-trasparente);
+    box-shadow: var(--shadow-3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 2em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Migliorato hover */
+
+    /* Supporto Safari */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+/* ===== HOVER BLOCCHI TIMELINE ===== */
+section.blocco-timeline:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 153, 255, 0.2);
+}
+
+/* ===== CONTENUTO TIMELINE ===== */
+div.contenuto-timeline h3 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    font-family: var(--famiglia-geo);
+    color: var(--text-terzo);
+    z-index: 999;
+}
+
+div.contenuto-timeline p {
+    color: var(--text-base);
+    margin-bottom: 1rem;
+    /* Aggiunto spacing tra paragrafi */
+    line-height: 1.7;
+    /* Migliorata leggibilità */
+}
+
+/* ========================================
+   LINK GITHUB
+   ======================================== */
+.link-github {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    max-width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.link-github a {
+    color: var(--link-1);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+    /* Per hover più fluido */
+}
+
+.link-github a:hover {
+    color: var(--hover-1);
+    text-shadow: 0 0 8px var(--hover-1);
+}
+
+.link-github:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================
+   GALLERIA EQUILIBRIO
+   ======================================== */
+.galleria-equilibrio {
+    margin-top: 2rem;
+    display: grid;
+    gap: 2em;
+    grid-template-columns: 1fr;
+}
+
+/* ===== FIGURE GALLERIA ===== */
+.galleria-equilibrio figure {
+    background: var(--bg-scuro-trasparente);
+    box-shadow: var(--shadow-3);
+
+    border-radius: 1rem;
+    overflow: hidden;
+    text-align: center;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galleria-equilibrio figure:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== IMMAGINI GALLERIA ===== */
+.galleria-equilibrio img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.galleria-equilibrio figure:hover img {
+    transform: scale(1.02);
+}
+
+
+/* ========================================
+   FOOTER - CONTATTI
+   ======================================== */
+footer#contatti {
+    text-align: center;
+    padding: 2em 1.5em;
+    margin-top: 3em;
+    background-color: var(--bg-scuro-trasparente);
+    box-shadow: var(--shadow-1);
+    border-top: var(--bordi-1);
+
+    /* Supporto Safari */
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+/* ===== CONTATTI FOOTER ===== */
+footer#contatti p,
+footer#contatti a {
+    color: var(--text-base);
+    text-decoration: none;
+    margin: 0.5rem 0;
+    transition: all 0.3s ease;
+    /* Spostato qui per performance */
+}
+
+/* ===== HOVER LINK FOOTER ===== */
+footer#contatti a:hover {
+    color: var(--hover-1);
+    text-shadow: 0 0 6px var(--hover-1);
+}
+
+/* ===== ICONE FOOTER ===== */
+footer#contatti i {
+    margin-right: 0.5rem;
+    font-size: 0.8em;
+}
+
+/* ========================================
+   SOCIAL LINK
+   ======================================== */
+.social-link {
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.social-link a {
+    font-size: 2.5em;
+    color: var(--text-secondo);
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    /* Per hover più fluido */
+}
+
+/* LinkedIn blu */
+.social-link a[href*="linkedin"] i {
+    color: #0A66C2;
+}
+
+/* Instagram fucsia */
+.social-link a[href*="instagram"] i {
+    color: #E1306C;
+}
+
+.social-link a:hover {
+    transform: scale(1.2);
+    filter: brightness(1.3);
+}
+
+/* ========================================
+   FOCUS STATES (ACCESSIBILITÀ)
+   ======================================== */
+a:focus,
+button:focus {
+    outline: 2px solid var(--hover-1);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* EMAIL DI CONTATTO */
+.email-contatto {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.etichetta-email {
+    font-size: 1.6rem;
+    color: var(--text-terzo);
+    margin-bottom: 0.5rem;
+}
+
+.email-contatto a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    font-size: 1.8rem;
+    color: var(--link-1);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.email-contatto a i {
+    font-size: 2rem;
+    color: var(--link-1);
+    animation: glowEmail 3s ease-in-out infinite alternate;
+}
+
+.email-contatto a:hover {
+    transform: scale(1.05);
+    filter: brightness(1.3);
+}
+
+
+
+/* pulsante torna all'inizio */
+#tornaSu {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    background-color: var(--colore-energia);
+    color: var(--text-secondo);
+
+    z-index: 999;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+#tornaSu.mostra {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+#tornaSu:hover {
+    box-shadow: 0 0 15px var(--hover-1);
+    color: var(--hover-1);
+    transform: scale(1.1);
+}
