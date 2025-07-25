@@ -421,6 +421,8 @@ div.contenuto-timeline p {
     /* Aggiunto spacing tra paragrafi */
     line-height: 1.7;
     /* Migliorata leggibilità */
+
+    font-size: 2rem;
 }
 
 /* ========================================
